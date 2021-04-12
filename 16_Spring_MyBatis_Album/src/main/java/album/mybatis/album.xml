@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="album.AlbumBean">
+	
+	<select id="GetTotalCount" parameterType="hashmap" resultType="int">
+		select count(*) from albums
+		<if test="whatColumn=='title'">
+			where title like #{keyword}
+		</if>
+		
+		<if test="whatColumn=='singer'">
+			where singer like #{keyword}
+		</if>
+	</select>
+	
+	<select id="GetAlbumList" resultType="MyAlbum" parameterType="hashmap">
+		select * from albums
+		<if test="whatColumn=='title'">
+			where title like #{keyword}
+		</if>
+		<if test="whatColumn=='singer'">
+			where singer like #{keyword}
+		</if>
+		order by num desc	
+	</select>
+	
+	<insert id="InsertAlbum" parameterType="MyAlbum">
+		insert into albums(num,title,singer,price)
+		values(albums_seq.nextval, #{title},#{singer},#{price})
+	</insert>
+	
+	<delete id="DeleteAlbum" parameterType="int">
+		delete from albums
+		where num= #{num}
+	</delete>
+	
+	<select id="GetAlbum" parameterType="int" resultType="MyAlbum">
+		select * from albums
+		where num = #{num}
+	</select>
+	
+	<update id="UpdateAlbum" parameterType="MyAlbum">
+		update albums set
+		title=#{title}, singer=#{singer}, price=#{price}, day=#{day} 
+		where num = #{num}
+	</update>
+</mapper>  
+
+<!-- album.xml mapper 화일 (DAO 역할)
+member.xml
+product.xml
+~는 생략 가능
+resultType ~꼭 써야되고, ~쓰면 절대 안된다.
+-->
+

@@ -1,0 +1,31 @@
+drop table albums;
+create table albums(
+	num number primary key,
+	title varchar2(20),
+	singer varchar2(20),
+	price number,
+	day date default sysdate
+);
+
+drop sequence albums_seq;
+create sequence albums_seq 
+nocache;
+
+insert into albums values(albums_seq.nextval,'fake love','bts',2000,default);
+insert into albums values(albums_seq.nextval,'다이너마이트','bts',3000,default);
+commit;
+select * from albums;
+
+--------------------------------------------------------------------
+1:web.xml에 한글 설정 날짜/시간 확인 => 실행 O 
+2:pom.xml에 dependency 설정 : O
+web.xml
+root-context.xml : bean 설정 3가지 
+xml 2가지 생성 : 안에 내용 작성
+web.xml에서 *.ab => album-servlet.xml
+
+
+
+
+
+
