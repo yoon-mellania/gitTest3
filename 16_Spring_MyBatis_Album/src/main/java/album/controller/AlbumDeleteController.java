@@ -16,6 +16,9 @@ public class AlbumDeleteController {
 	@Autowired
 	private AlbumDao albumDao;
 	
+// 이 아래 변경함
+//@RequestParam을 사용함
+
 	@RequestMapping(command)
 	public String doAction(@RequestParam(value="num", required=true) int num,
 			@RequestParam(value="pageNumber", required=true) int pageNumber) {
